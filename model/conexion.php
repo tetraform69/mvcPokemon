@@ -1,6 +1,6 @@
 <?php
 
-class conexion
+class Conexion
 {
     private $host = "localhost";
     private $user = "root";
@@ -20,7 +20,10 @@ class conexion
         }
     }
 
+    /**
+     * get the conexion
+     */
     public function getCon(){
-        
+        return $this->con;
     }
 }

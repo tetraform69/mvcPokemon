@@ -12,8 +12,8 @@ include_once "header.php";
         <div class="col-6">
             <form>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="formId1" id="formId1" placeholder="example">
-                    <label for="formId1">Nombre Del Rol:</label>
+                    <input type="text" class="form-control" name="nameRol" id="nameRol" placeholder="example">
+                    <label for="nameRol">Nombre Del Rol:</label>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="created()" >Agregar</button>
             </form>
