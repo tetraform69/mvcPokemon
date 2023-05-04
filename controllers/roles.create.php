@@ -1,5 +1,5 @@
 <?php
-include_once "../model/rol.php"
+include_once "../model/rol.php";
 
 $rol = new Model\Rol();
 
