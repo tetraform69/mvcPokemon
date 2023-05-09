@@ -44,15 +44,20 @@ include_once "header.php";
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="updateModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="updateModalLabel">Cambiar Nombre</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="modal-body" id="modal-update">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control" name="rolNameUpdate" id="rolNameUpdate" placeholder="@example">
+                  <label for="rolNameUpdate">Nombre Del Rol:</label>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

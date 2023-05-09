@@ -30,15 +30,14 @@ function read() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             html = ""
             data.forEach((rol, index) => {
                 html += `
                 <tr>
                 <th scope="row">${++index}</th>
-                <td>${rol.nombre_rol}</td>
+                <td>${rol.nombreRol}</td>
                 <td>${rol.estado}</td>
-                <td>${rol.fecha_creacion}</td>
+                <td>${rol.fechaCreacion}</td>
                 <td>
                 <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
                 <a class="btn btn-danger" role="button">Eliminar</a>
@@ -54,7 +53,27 @@ function read() {
 
 function readID(id) {
     console.log(id)
+    url = "../controllers/roles.readOne.php"
 
+    var data = `id=${id}`
+
+    var options = {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById("rolNameUpdate").value = data[0].nombreRol
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
 }
 
 function updated() {

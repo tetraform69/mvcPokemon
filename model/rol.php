@@ -20,7 +20,7 @@ class Rol
     public function create()
     {
         try {
-            $request = $this->con->getCon()->prepare("INSERT INTO roles(nombre_rol, estado) VALUES(:nombre, :estado)");
+            $request = $this->con->getCon()->prepare("INSERT INTO roles(nombreRol, estado) VALUES(:nombre, :estado)");
             $request->bindParam(':nombre', $this->nameRol);
             $request->bindParam(':estado', $this->estado);
             $request->execute();
@@ -34,6 +34,19 @@ class Rol
     {
         try {
             $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE estado = 'A'");
+            $request->execute();
+            $result = $request->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOExeption $err) {
+            return "Error al leer" . $err->getMessage();
+        }
+    }
+
+    public function readOne($id)
+    {
+        try {
+            $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE id = :id");
+            $request->bindParam(':id', $id);
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
