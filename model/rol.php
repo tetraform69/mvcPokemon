@@ -4,18 +4,42 @@ namespace Model;
 
 include_once "conexion.php";
 
-class Rol{
+class Rol
+{
 
     private $id;
     private $nameRol;
+    private $estado = 'A';
     public $con; //* Objeto conexion
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->con = new \Conexion();
     }
 
-    public function create(){
-        
+    public function create()
+    {
+        try {
+            $request = $this->con->getCon()->prepare("INSERT INTO roles(nombre_rol, estado) VALUES(:nombre, :estado)");
+            $request->bindParam(':nombre', $this->nameRol);
+            $request->bindParam(':estado', $this->estado);
+            $request->execute();
+            return "Rol creado";
+        } catch (PDOExeption $err) {
+            return "Error al crear" . $err->getMessage();
+        }
+    }
+
+    public function read()
+    {
+        try {
+            $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE estado = 'A'");
+            $request->execute();
+            $result = $request->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOExeption $err) {
+            return "Error al leer" . $err->getMessage();
+        }
     }
 
     /**
@@ -50,6 +74,24 @@ class Rol{
     public function setNameRol($nameRol): self
     {
         $this->nameRol = $nameRol;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of estado
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set the value of estado
+     */
+    public function setEstado($estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }
