@@ -1,9 +1,9 @@
 function created() {
     url = "../controllers/roles.create.php"
-    
+
     //* Informacion del formulario
     var data = `nameRol=${document.getElementById("nameRol").value}`
-    
+
     //* Opciones de la peticion
     var options = {
         method: 'POST',
@@ -12,18 +12,48 @@ function created() {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     }
-    
+
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            read()
+            document.getElementById("nameRol").value = ""
         })
         .catch(error => {
             console.error(`Error al crear el rol: ${error}`);
         })
 }
 
-function readed() {
+function read() {
+    url = "../controllers/roles.read.php"
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            html = ""
+            data.forEach((rol, index) => {
+                html += `
+                <tr>
+                <th scope="row">${++index}</th>
+                <td>${rol.nombre_rol}</td>
+                <td>${rol.estado}</td>
+                <td>${rol.fecha_creacion}</td>
+                <td>
+                <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
+                <a class="btn btn-danger" role="button">Eliminar</a>
+                </td>
+                </tr>`
+            });
+            document.getElementById("table-rol").innerHTML = html
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
+}
+
+function readID(id) {
+    console.log(id)
 
 }
 
@@ -33,4 +63,8 @@ function updated() {
 
 function deleted() {
 
+}
+
+window.onload = (event) => {
+    read()
 }
