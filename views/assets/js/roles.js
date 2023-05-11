@@ -52,7 +52,6 @@ function read() {
 }
 
 function readID(id) {
-    console.log(id)
     url = "../controllers/roles.readOne.php"
 
     var data = `id=${id}`
@@ -70,6 +69,7 @@ function readID(id) {
         .then(data => {
             console.log(data)
             document.getElementById("rolNameUpdate").value = data[0].nombreRol
+            document.getElementById("rolIDUpdate").value = data[0].id
         })
         .catch(error => {
             console.error(`Error: ${error}`);
@@ -77,7 +77,32 @@ function readID(id) {
 }
 
 function updated() {
+    let id = document.getElementById("rolIDUpdate").value
+    let name = document.getElementById("rolNameUpdate").value
+    console.log(id)
+    url = "../controllers/roles.update.php"
 
+    var data = {
+        "id": id,
+        "name": name
+    }
+
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
 }
 
 function deleted() {

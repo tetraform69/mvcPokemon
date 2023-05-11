@@ -49,15 +49,14 @@ include_once "header.php";
             </div>
             <div class="modal-body" id="modal-update">
                 <div class="form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control" name="rolNameUpdate" id="rolNameUpdate" placeholder="@example">
-                  <label for="rolNameUpdate">Nombre Del Rol:</label>
+                    <input type="hidden" id="rolIDUpdate">
+                    <input type="text" class="form-control" name="rolNameUpdate" id="rolNameUpdate" placeholder="@example">
+                    <label for="rolNameUpdate">Nombre Del Rol:</label>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" onclick="updated()">Guardar</button>
             </div>
         </div>
     </div>
