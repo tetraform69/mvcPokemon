@@ -24,41 +24,47 @@ function created() {
         })
 }
 
-function read() {
-    url = "../controllers/roles.read.php"
+function readed() {
 
-    fetch(url)
+    fetch(url, options)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            html = ""
-            data.forEach((rol, index) => {
-                html += `
-                <tr>
-                <th scope="row">${++index}</th>
-                <td>${rol.nombre_rol}</td>
-                <td>${rol.estado}</td>
-                <td>${rol.fecha_creacion}</td>
-                <td>
-                <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
-                <a class="btn btn-danger" role="button">Eliminar</a>
-                </td>
-                </tr>`
-            });
-            document.getElementById("table-rol").innerHTML = html
+            document.getElementById("rolNameUpdate").value = data[0].nombreRol
+            document.getElementById("rolIDUpdate").value = data[0].id
         })
         .catch(error => {
             console.error(`Error: ${error}`);
         })
 }
 
-function readID(id) {
-    console.log(id)
-
-}
-
 function updated() {
+    let id = document.getElementById("rolIDUpdate").value
+    let name = document.getElementById("rolNameUpdate").value
+    console.log(id)
+    url = "../controllers/roles.update.php"
 
+    var data = {
+        "id": id,
+        "name": name
+    }
+
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
 }
 
 function deleted() {

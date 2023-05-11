@@ -4,36 +4,72 @@ namespace Model;
 
 include_once "conexion.php";
 
-class Rol{
+class Rol
+{
 
     private $id;
     private $nameRol;
     private $estado = 'A';
     public $con; //* Objeto conexion
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->con = new \Conexion();
     }
 
+<<<<<<< HEAD
     public function create(){
         try{
             $request = $this->con->getCon()->prepare("INSERT INTO roles(nombre_rol, estado) VALUES(:nombre, :estado)");
+=======
+    public function create()
+    {
+        try {
+            $request = $this->con->getCon()->prepare("INSERT INTO roles(nombreRol, estado) VALUES(:nombre, :estado)");
+>>>>>>> 8ae87c0e0c573a8ea6565f73c99136a9736f663c
             $request->bindParam(':nombre', $this->nameRol);
             $request->bindParam(':estado', $this->estado);
             $request->execute();
             return "Rol creado";
+<<<<<<< HEAD
         } catch (PDOExeption $err){
+=======
+        } catch (PDOExeption $err) {
+>>>>>>> 8ae87c0e0c573a8ea6565f73c99136a9736f663c
             return "Error al crear" . $err->getMessage();
         }
     }
 
+<<<<<<< HEAD
     public function read(){
         try{
+=======
+    public function read()
+    {
+        try {
+>>>>>>> 8ae87c0e0c573a8ea6565f73c99136a9736f663c
             $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE estado = 'A'");
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
+<<<<<<< HEAD
         } catch (PDOExeption $err){
+=======
+        } catch (PDOExeption $err) {
+            return "Error al leer" . $err->getMessage();
+        }
+    }
+
+    public function readOne($id)
+    {
+        try {
+            $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE id = :id");
+            $request->bindParam(':id', $id);
+            $request->execute();
+            $result = $request->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOExeption $err) {
+>>>>>>> 8ae87c0e0c573a8ea6565f73c99136a9736f663c
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -91,4 +127,8 @@ class Rol{
 
         return $this;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8ae87c0e0c573a8ea6565f73c99136a9736f663c
