@@ -24,45 +24,7 @@ function created() {
         })
 }
 
-function read() {
-    url = "../controllers/roles.read.php"
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            html = ""
-            data.forEach((rol, index) => {
-                html += `
-                <tr>
-                <th scope="row">${++index}</th>
-                <td>${rol.nombreRol}</td>
-                <td>${rol.estado}</td>
-                <td>${rol.fechaCreacion}</td>
-                <td>
-                <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
-                <a class="btn btn-danger" role="button">Eliminar</a>
-                </td>
-                </tr>`
-            });
-            document.getElementById("table-rol").innerHTML = html
-        })
-        .catch(error => {
-            console.error(`Error: ${error}`);
-        })
-}
-
-function readID(id) {
-    url = "../controllers/roles.readOne.php"
-
-    var data = `id=${id}`
-
-    var options = {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
+function readed() {
 
     fetch(url, options)
         .then(response => response.json())
