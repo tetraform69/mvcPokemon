@@ -67,7 +67,6 @@ function readID(id) {
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             document.getElementById("rolNameUpdate").value = data[0].nombreRol
             document.getElementById("rolIDUpdate").value = data[0].id
         })
@@ -79,7 +78,6 @@ function readID(id) {
 function updated() {
     let id = document.getElementById("rolIDUpdate").value
     let name = document.getElementById("rolNameUpdate").value
-    console.log(id)
     url = "../controllers/roles.update.php"
 
     var data = {
@@ -98,7 +96,7 @@ function updated() {
     fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            read()
         })
         .catch(error => {
             console.error(`Error: ${error}`);

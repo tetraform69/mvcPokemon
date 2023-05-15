@@ -8,8 +8,13 @@ $id = $data->id;
 $name = $data->name;
 
 $rol = new Model\Rol();
-
-$result = $rol->readOne($id);
+echo $id;
+echo $name;
+$rol->setId($id);
+$rol->setNameRol($name);
+echo $rol->getId();
+echo $rol->getNameRol();
+$result = $rol->update();
 
 echo json_encode($result);
 
