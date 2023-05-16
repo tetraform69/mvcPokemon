@@ -79,7 +79,19 @@ class Rol
             $result = "Estado = $this->estado";
             return $result;
         } catch (PDOExeption $err) {
-            return "Error al leer" . $err->getMessage();
+            return "Error" . $err->getMessage();
+        }
+    }
+
+    public function delete()
+    {
+        try {
+            $request = $this->con->getCon()->prepare("DELETE FROM roles WHERE id = :id");
+            $request->bindParam(":id", $this->id);
+            $request->execute();
+            return "Eliminado";
+        } catch (PDOExeption $err) {
+            return "Error al borrar: " . $err->getMessage();
         }
     }
 

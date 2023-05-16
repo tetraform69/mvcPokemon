@@ -49,7 +49,6 @@ include_once "header.php";
             </div>
             <div class="modal-body" id="modal-update">
                 <div class="form-floating mb-3">
-                    <input type="hidden" id="rolIDUpdate">
                     <input type="text" class="form-control" name="rolNameUpdate" id="rolNameUpdate"
                         placeholder="@example">
                     <label for="rolNameUpdate">Nombre Del Rol:</label>
@@ -72,7 +71,6 @@ include_once "header.php";
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <input type="hidden" id="rolIDDelete">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                     onclick="deleted()">Eliminar</button>

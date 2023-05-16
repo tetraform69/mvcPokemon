@@ -43,7 +43,7 @@ function read() {
                 <td>${rol.fechaCreacion}</td>
                 <td>
                 <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
-                <a onclick="preDeleted('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</a>
+                <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</a>
                 </td>
                 </tr>`
             });
@@ -72,7 +72,7 @@ function readID(id) {
         .then(response => response.json())
         .then(data => {
             document.getElementById("rolNameUpdate").value = data[0].nombreRol
-            document.getElementById("rolIDUpdate").value = data[0].id
+            localStorage.id = data[0].id
         })
         .catch(error => {
             console.error(`Error: ${error}`);
@@ -80,7 +80,7 @@ function readID(id) {
 }
 
 function updated() {
-    let id = document.getElementById("rolIDUpdate").value
+    let id = localStorage.id
     let name = document.getElementById("rolNameUpdate").value
     url = "../controllers/roles.update.php"
 
@@ -108,33 +108,31 @@ function updated() {
         })
 }
 
-function preDeleted(id) {
-    url = "../controllers/roles.readOne.php"
+function deleted() {
+    let id = localStorage.id
 
-    var data = `id=${id}`
+    let url = "../controllers/roles.delete.php"
 
-    var options = {
-        method: 'POST',
-        body: data,
+    let data = {
+        "id": id,
+    }
+
+    let options = {
+        method: "POST",
+        body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     }
 
     fetch(url, options)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("rolIDDelete").value = data[0].id
-        })
-        .catch(error => {
-            console.error(`Error: ${error}`);
-        })
-}
-
-function deleted() {
-    let id = document.getElementById("rolIDDelete").value
-
-    console.log(id);
+    .then(response => response.json())
+    .then(data =>{
+        read()
+    })
+    .catch(error => {
+        console.error(`Error: ${error}`);
+    })
 }
 
 function statusRol(id, estado) {
