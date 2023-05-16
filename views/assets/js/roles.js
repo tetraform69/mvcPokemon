@@ -36,15 +36,19 @@ function read() {
                 <tr>
                 <th scope="row">${++index}</th>
                 <td>${rol.nombreRol}</td>
-                <td>${rol.estado}</td>
+                <td><div class="form-check form-switch">
+                <input onclick="statusRol(${rol.id},'${rol.estado}')" class="form-check-input" type="checkbox" role="switch" id="switch${rol.nombreRol}" ${rol.estado == "A"? "checked" : ""}>
+                <label class="form-check-label" for="switch${rol.nombreRol}">${rol.estado == "A"? "Activo": "Inactivo"}</label>
+                </div></td>
                 <td>${rol.fechaCreacion}</td>
                 <td>
                 <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
-                <a class="btn btn-danger" role="button">Eliminar</a>
+                <a onclick="preDeleted('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</a>
                 </td>
                 </tr>`
             });
             document.getElementById("table-rol").innerHTML = html
+            // updateEstado()
         })
         .catch(error => {
             console.error(`Error: ${error}`);
@@ -99,13 +103,75 @@ function updated() {
             read()
         })
         .catch(error => {
+            console.error(`Error`);
+            read()
+        })
+}
+
+function preDeleted(id) {
+    url = "../controllers/roles.readOne.php"
+
+    var data = `id=${id}`
+
+    var options = {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("rolIDDelete").value = data[0].id
+        })
+        .catch(error => {
             console.error(`Error: ${error}`);
         })
 }
 
 function deleted() {
+    let id = document.getElementById("rolIDDelete").value
 
+    console.log(id);
 }
+
+function statusRol(id, estado) {
+    url = "../controllers/roles.estado.php"
+
+    var data = {
+        "id": id,
+        "estado": estado
+    }
+
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            read()
+        })
+        .catch(error => {
+            console.error(`Error ${error}`);
+        })
+}
+
+// function updateEstado(){
+//     let inputs = document.getElementById("table-rol").getElementsByClassName("form-check-input")
+//     let labels = document.getElementById("table-rol").getElementsByClassName("form-check-label")
+
+//     console.log(inputs);
+//     for (let i = 0; i < inputs.length; i++) {
+//         labels[i].innerHTML == "A"? inputs[i].setAttribute("checked",""): ""
+//     } 
+// }
 
 window.onload = (event) => {
     read()

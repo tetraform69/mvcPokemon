@@ -50,13 +50,32 @@ include_once "header.php";
             <div class="modal-body" id="modal-update">
                 <div class="form-floating mb-3">
                     <input type="hidden" id="rolIDUpdate">
-                    <input type="text" class="form-control" name="rolNameUpdate" id="rolNameUpdate" placeholder="@example">
+                    <input type="text" class="form-control" name="rolNameUpdate" id="rolNameUpdate"
+                        placeholder="@example">
                     <label for="rolNameUpdate">Nombre Del Rol:</label>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="updated()">Guardar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    onclick="updated()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Rol</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="rolIDDelete">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    onclick="deleted()">Eliminar</button>
             </div>
         </div>
     </div>

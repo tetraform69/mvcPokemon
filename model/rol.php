@@ -33,7 +33,7 @@ class Rol
     public function read()
     {
         try {
-            $request = $this->con->getCon()->prepare("SELECT * FROM roles WHERE estado = 'A'");
+            $request = $this->con->getCon()->prepare("SELECT * FROM roles");
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
@@ -58,11 +58,25 @@ class Rol
     public function update()
     {
         try {
-            $request = $this->con->getCon()->prepare("UPDATE roles SET nombreRol = ':name' WHERE id = :id");
+            $request = $this->con->getCon()->prepare("UPDATE roles SET nombreRol = :name WHERE id = :id");
             $request->bindParam(':name', $this->nameRol);
             $request->bindParam(':id', $this->id);
             $request->execute();
             $result = "Actualizado";
+            return $result;
+        } catch (PDOExeption $err) {
+            return "Error al leer" . $err->getMessage();
+        }
+    }
+
+    public function estado()
+    {
+        try {
+            $request = $this->con->getCon()->prepare("UPDATE roles SET estado = :estado WHERE id = :id");
+            $request->bindParam(':estado', $this->estado);
+            $request->bindParam(':id', $this->id);
+            $request->execute();
+            $result = "Estado = $this->estado";
             return $result;
         } catch (PDOExeption $err) {
             return "Error al leer" . $err->getMessage();
