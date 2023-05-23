@@ -23,7 +23,7 @@ include_once "header.php";
     <div class="row justify-content-center">
         <h2 class="text-center bg-dark text-white">Datos De Roles</h2>
         <div class="col-8">
-            <table class="table table-dark">
+            <table class="table table-dark" id="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -70,9 +70,14 @@ include_once "header.php";
                 <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Rol</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h3 id="mensajeEliminar"></h3>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                     onclick="deleted()">Eliminar</button>
             </div>
         </div>

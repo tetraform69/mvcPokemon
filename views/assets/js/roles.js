@@ -1,3 +1,56 @@
+let table = new DataTable(document.getElementById("table"), {
+    language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+    },
+    dom: 'Bfrtip',
+    buttons: [
+        {
+            extend: "copy",
+            text: "<i class='fa-solid fa-copy'></i>",
+            titleAttr: "Copiar",
+            exportOptions: {
+                columns: [0,1,2,3]
+            },
+            className: "copyDataTable"
+        },
+        {
+            extend: "excel",
+            text: "<i class='fa-solid fa-file-excel'></i>",
+            titleAttr: "Excel",
+            exportOptions: {
+                columns: [0,1,2,3]
+            },
+            className: "excelDataTable"
+        },
+        {
+            extend: "print",
+            text: "<i class='fa-solid fa-file-pdf'></i>",
+            titleAttr: "PDF",
+            exportOptions: {
+                columns: [0,1,2,3]
+            },
+            className: "pdfDataTable",
+            download: "open"
+        },
+        {
+            extend: "print",
+            text: "<i class='fa-solid fa-print'></i>",
+            titleAttr: "Imprimir",
+            exportOptions: {
+                columns: [0,1,2,3]
+            },
+            className: "printDataTable"
+        }
+    ],
+    columns: [
+        { data: '#' },
+        { data: 'Nombre' },
+        { data: 'Estado' },
+        { data: 'Fecha De Creacion' },
+        { data: 'Opciones' }
+    ],
+})
+
 function created() {
     url = "../controllers/roles.create.php"
 
@@ -30,24 +83,18 @@ function read() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            html = ""
+            table.clear()
             data.forEach((rol, index) => {
-                html += `
-                <tr>
-                <th scope="row">${++index}</th>
-                <td>${rol.nombreRol}</td>
-                <td><div class="form-check form-switch">
-                <input onclick="statusRol(${rol.id},'${rol.estado}')" class="form-check-input" type="checkbox" role="switch" id="switch${rol.nombreRol}" ${rol.estado == "A"? "checked" : ""}>
-                <label class="form-check-label" for="switch${rol.nombreRol}">${rol.estado == "A"? "Activo": "Inactivo"}</label>
-                </div></td>
-                <td>${rol.fechaCreacion}</td>
-                <td>
-                <a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal">Editar</a>
-                <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</a>
-                </td>
-                </tr>`
+                table.row.add({
+                    "#": `${++index}`,
+                    "Nombre": `${rol.nombreRol}`,
+                    "Estado": `<input onclick="statusRol(${rol.id},'${rol.estado}')" class="form-check-input" type="checkbox" role="switch" id="switch${rol.nombreRol}" ${rol.estado == "A" ? "checked" : ""}>
+                    <label class="form-check-label" for="switch${rol.nombreRol}">${rol.estado == "A" ? "Activo" : "Inactivo"}</label>`,
+                    "Fecha De Creacion": `${rol.fechaCreacion}`,
+                    "Opciones": `<a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa fa-edit"></i></a>
+                    <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></a>`
+                }).draw();
             });
-            document.getElementById("table-rol").innerHTML = html
             // updateEstado()
         })
         .catch(error => {
@@ -72,6 +119,7 @@ function readID(id) {
         .then(response => response.json())
         .then(data => {
             document.getElementById("rolNameUpdate").value = data[0].nombreRol
+            document.getElementById("mensajeEliminar").innerHTML = `Seguro de Eliminar a ${data[0].nombreRol}?`
             localStorage.id = data[0].id
         })
         .catch(error => {
@@ -111,6 +159,8 @@ function updated() {
 function deleted() {
     let id = localStorage.id
 
+    console.log(id);
+
     let url = "../controllers/roles.delete.php"
 
     let data = {
@@ -126,13 +176,13 @@ function deleted() {
     }
 
     fetch(url, options)
-    .then(response => response.json())
-    .then(data =>{
-        read()
-    })
-    .catch(error => {
-        console.error(`Error: ${error}`);
-    })
+        .then(response => response.json())
+        .then(data => {
+            read()
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
 }
 
 function statusRol(id, estado) {
