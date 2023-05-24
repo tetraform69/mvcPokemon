@@ -1,12 +1,16 @@
 .copyDataTable{
-    background-color: rgb(250, 202, 70);
+    color: rgb(34, 34, 34);
+    background-color: rgb(255, 187, 0);
 }
 .excelDataTable{
-    background-color: rgb(21, 255, 0);
+    color: rgb(34, 34, 34);
+    background-color: rgb(33, 213, 17);
 }
 .pdfDataTable{
+    color: rgb(34, 34, 34);
     background-color: rgb(255, 0, 0);
 }
 .printDataTable{
+    color: rgb(34, 34, 34);
     background-color: rgb(83, 186, 255);
 }
