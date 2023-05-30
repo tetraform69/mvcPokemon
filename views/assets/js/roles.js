@@ -6,7 +6,7 @@ let table = new DataTable(document.getElementById("table"), {
     buttons: [
         {
             extend: "copy",
-            text: "<i class='bi bi-clipboard'></i>",
+            text: '<i class="fa-regular fa-copy"></i>',
             titleAttr: "Copiar",
             exportOptions: {
                 columns: [0,1,2,3]
@@ -15,7 +15,7 @@ let table = new DataTable(document.getElementById("table"), {
         },
         {
             extend: "excel",
-            text: "<i class='bi bi-file-earmark-x'></i>",
+            text: '<i class="fa-regular fa-file-excel"></i>',
             titleAttr: "Excel",
             exportOptions: {
                 columns: [0,1,2,3]
@@ -23,8 +23,8 @@ let table = new DataTable(document.getElementById("table"), {
             className: "excelDataTable"
         },
         {
-            extend: "print",
-            text: "<i class='bi bi-file-earmark-pdf'></i>",
+            extend: "pdf",
+            text: '<i class="fa-regular fa-file-pdf"></i>',
             titleAttr: "PDF",
             exportOptions: {
                 columns: [0,1,2,3]
@@ -34,7 +34,7 @@ let table = new DataTable(document.getElementById("table"), {
         },
         {
             extend: "print",
-            text: "<i class='bi bi-printer-fill'></i>",
+            text: '<i class="fa-solid fa-print"></i>',
             titleAttr: "Imprimir",
             exportOptions: {
                 columns: [0,1,2,3]
@@ -91,8 +91,8 @@ function read() {
                     "Estado": `<input onclick="statusRol(${rol.id},'${rol.estado}')" class="form-check-input" type="checkbox" role="switch" id="switch${rol.nombreRol}" ${rol.estado == "A" ? "checked" : ""}>
                     <label class="form-check-label" for="switch${rol.nombreRol}">${rol.estado == "A" ? "Activo" : "Inactivo"}</label>`,
                     "Fecha De Creacion": `${rol.fechaCreacion}`,
-                    "Opciones": `<a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil-square"></i></a>
-                    <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></i></a>`
+                    "Opciones": `<a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa-solid fa-pen-to-square"></i></i></a>
+                    <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></a>`
                 }).draw();
             });
             // updateEstado()
