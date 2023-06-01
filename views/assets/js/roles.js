@@ -159,8 +159,6 @@ function updated() {
 function deleted() {
     let id = localStorage.id
 
-    console.log(id);
-
     let url = "../controllers/roles.delete.php"
 
     let data = {

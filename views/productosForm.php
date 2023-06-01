@@ -16,11 +16,11 @@ include_once "header.php";
                     <label for="name">Nombre Del Producto:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="precio" id="precio" placeholder="example">
+                    <input type="number" class="form-control" name="precio" id="precio" placeholder="example">
                     <label for="precio">Precio Del Producto:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="cantidad" id="cantidad" placeholder="example">
+                    <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="example">
                     <label for="cantidad">Cantidad Del Producto:</label>
                 </div>
                 <div class="form-floating mb-3">
@@ -40,12 +40,14 @@ include_once "header.php";
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha De Creacion</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
-                <tbody id="table-rol">
+                <tbody>
                 </tbody>
             </table>
         </div>
@@ -56,14 +58,29 @@ include_once "header.php";
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="updateModalLabel">Cambiar Nombre</h1>
+                <h1 class="modal-title fs-5" id="updateModalLabel">Cambiar Producto</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal-update">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="rolNameUpdate" id="rolNameUpdate"
+                    <input type="text" class="form-control" name="nameUpdate" id="nameUpdate"
                         placeholder="@example">
-                    <label for="rolNameUpdate">Nombre Del Rol:</label>
+                    <label for="nameUpdate">Nombre Del Producto:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="precioUpdate" id="precioUpdate"
+                        placeholder="@example">
+                    <label for="precioUpdate">Precio Del Producto:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="cantidadUpdate" id="cantidadUpdate"
+                        placeholder="@example">
+                    <label for="cantidadUpdate">Cantidad Del Producto:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="descripcionUpdate" id="descripcionUpdate"
+                        placeholder="@example">
+                    <label for="descripcionUpdate">Descripcion Del Producto:</label>
                 </div>
             </div>
             <div class="modal-footer">
