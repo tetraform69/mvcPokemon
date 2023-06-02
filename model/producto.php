@@ -64,8 +64,11 @@ class Producto
     public function update()
     {
         try {
-            $request = $this->con->getCon()->prepare("UPDATE productos SET nombrePro = :nombre WHERE id = :id");
+            $request = $this->con->getCon()->prepare("UPDATE productos SET nombrePro = :nombre, precioPro = :precio, cantidadPro = :cantidad, descripPro = :descripcion WHERE id = :id");
             $request->bindParam(':nombre', $this->nombre);
+            $request->bindParam(':precio', $this->precio);
+            $request->bindParam(':cantidad', $this->cantidad);
+            $request->bindParam(':descripcion', $this->descripcion);
             $request->bindParam(':id', $this->id);
             $request->execute();
             $result = "Actualizado";

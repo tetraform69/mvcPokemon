@@ -142,11 +142,101 @@ function readID(id) {
             document.getElementById("precioUpdate").value = data[0].precioPro
             document.getElementById("cantidadUpdate").value = data[0].cantidadPro
             document.getElementById("descripcionUpdate").value = data[0].descripPro
-            document.getElementById("mensajeEliminar").innerHTML = `Seguro de Eliminar a ${data[0].nombrePro}?`
+            document.getElementById("mensajeEliminar").innerHTML = `${data[0].nombrePro} ${data[0].descripPro}`
             localStorage.id = data[0].id
         })
         .catch(error => {
             console.error(`Error: ${error}`);
         })
 }
+
+function updated() {
+    url = "../controllers/productos.update.php"
+
+    let id = localStorage.id
+    let name = document.getElementById("nameUpdate").value
+    let precio = parseInt(document.getElementById("precioUpdate").value)
+    let cantidad = parseInt(document.getElementById("cantidadUpdate").value)
+    let descripcion = document.getElementById("descripcionUpdate").value
+
+    let data = {
+        "id": id,
+        "name": name,
+        "precio": precio,
+        "cantidad": cantidad,
+        "descripcion": descripcion
+    }
+
+    let options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+        read()
+    })
+    .catch(error => {
+        console.error(`Error`);
+        read()
+    })
+}
+
+function deleted() {
+    let id = localStorage.id
+
+    let url = "../controllers/productos.delete.php"
+
+    let data = {
+        "id": id
+    }
+
+    let options = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            read()
+        })
+        .catch(error => {
+            console.error(`Error: ${error}`);
+        })
+}
+
+function status(id, estado) {
+    url = "../controllers/productos.estado.php"
+
+    var data = {
+        "id": id,
+        "estado": estado
+    }
+
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            read()
+        })
+        .catch(error => {
+            console.error(`Error ${error}`);
+        })
+}
+
 read()
