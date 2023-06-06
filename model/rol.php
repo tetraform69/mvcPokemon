@@ -3,6 +3,7 @@
 namespace Model;
 
 include_once "conexion.php";
+use PDOException;
 
 class Rol
 {
@@ -25,7 +26,7 @@ class Rol
             $request->bindParam(':estado', $this->estado);
             $request->execute();
             return "Rol creado";
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al crear" . $err->getMessage();
         }
     }
@@ -37,7 +38,7 @@ class Rol
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -50,7 +51,7 @@ class Rol
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -64,7 +65,7 @@ class Rol
             $request->execute();
             $result = "Actualizado";
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -78,7 +79,7 @@ class Rol
             $request->execute();
             $result = "Estado = $this->estado";
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error" . $err->getMessage();
         }
     }
@@ -90,7 +91,7 @@ class Rol
             $request->bindParam(":id", $this->id);
             $request->execute();
             return "Eliminado";
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al borrar: " . $err->getMessage();
         }
     }

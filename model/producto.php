@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+use PDOException;
 
 include_once "conexion.php";
 
@@ -31,7 +32,7 @@ class Producto
             $request->bindParam(':estado', $this->estado);
             $request->execute();
             return "Producto creado";
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al crear" . $err->getMessage();
         }
     }
@@ -43,7 +44,7 @@ class Producto
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -56,7 +57,7 @@ class Producto
             $request->execute();
             $result = $request->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -73,7 +74,7 @@ class Producto
             $request->execute();
             $result = "Actualizado";
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al leer" . $err->getMessage();
         }
     }
@@ -87,7 +88,7 @@ class Producto
             $request->execute();
             $result = "Estado = $this->estado";
             return $result;
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error" . $err->getMessage();
         }
     }
@@ -99,7 +100,7 @@ class Producto
             $request->bindParam(":id", $this->id);
             $request->execute();
             return "Eliminado";
-        } catch (PDOExeption $err) {
+        } catch (PDOException $err) {
             return "Error al borrar: " . $err->getMessage();
         }
     }

@@ -112,8 +112,10 @@ function read() {
                     "Fecha De Creacion": `${producto.fechaCreacion}`,
                     "Opciones": `<a onclick="readID('${producto.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa-solid fa-pen-to-square"></i></i></a>
                     <a onclick="readID('${producto.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></a>`
-                }).draw()
+                })
             })
+
+
         })
         .catch(error => {
             console.error(`Error: ${error}`);
@@ -176,14 +178,14 @@ function updated() {
     }
 
     fetch(url, options)
-    .then(response => response.json())
-    .then(data => {
-        read()
-    })
-    .catch(error => {
-        console.error(`Error`);
-        read()
-    })
+        .then(response => response.json())
+        .then(data => {
+            read()
+        })
+        .catch(error => {
+            console.error(`Error`);
+            read()
+        })
 }
 
 function deleted() {
