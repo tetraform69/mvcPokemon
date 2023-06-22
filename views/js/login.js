@@ -21,6 +21,9 @@ function login(event) {
         .then(data => {
             if (data.status == "ok") {
                 window.location.href = "/mvcPokemon/home"
+            } else {
+                email.focus()
+                message.innerText = data.message
             }
         })
 }

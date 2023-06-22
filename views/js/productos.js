@@ -58,7 +58,7 @@ function created() {
     let precio = document.getElementById("precio").value
     let cantidad = document.getElementById("cantidad").value
     let descripcion = document.getElementById("descripcion").value
-    url = "../controllers/productos.create.php"
+    url = "/mvcPokemon/producto"
 
     var data = {
         "name": name,
@@ -95,7 +95,7 @@ function created() {
 }
 
 function read() {
-    url = "../controllers/productos.read.php"
+    url = "/mvcPokemon/producto"
 
     fetch(url)
         .then(response => response.json())
@@ -112,10 +112,8 @@ function read() {
                     "Fecha De Creacion": `${producto.fechaCreacion}`,
                     "Opciones": `<a onclick="readID('${producto.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa-solid fa-pen-to-square"></i></i></a>
                     <a onclick="readID('${producto.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></a>`
-                })
+                }).draw()
             })
-
-
         })
         .catch(error => {
             console.error(`Error: ${error}`);
@@ -123,21 +121,9 @@ function read() {
 }
 
 function readID(id) {
-    url = "../controllers/productos.readOne.php"
+    url = `/mvcPokemon/producto/${id}`
 
-    var data = {
-        "id": id
-    }
-
-    var options = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    fetch(url, options)
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             document.getElementById("nameUpdate").value = data[0].nombrePro
@@ -153,7 +139,7 @@ function readID(id) {
 }
 
 function updated() {
-    url = "../controllers/productos.update.php"
+    url = "/mvcPokemon/producto"
 
     let id = localStorage.id
     let name = document.getElementById("nameUpdate").value
@@ -170,7 +156,7 @@ function updated() {
     }
 
     let options = {
-        method: 'POST',
+        method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -189,16 +175,16 @@ function updated() {
 }
 
 function deleted() {
-    let id = localStorage.id
+    let url = "/mvcPokemon/producto"
 
-    let url = "../controllers/productos.delete.php"
+    let id = localStorage.id
 
     let data = {
         "id": id
     }
 
     let options = {
-        method: "POST",
+        method: "DELETE",
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -216,7 +202,7 @@ function deleted() {
 }
 
 function status(id, estado) {
-    url = "../controllers/productos.estado.php"
+    url = "/mvcPokemon/producto"
 
     var data = {
         "id": id,
@@ -224,7 +210,7 @@ function status(id, estado) {
     }
 
     var options = {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'

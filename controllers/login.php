@@ -13,7 +13,7 @@ function login($data)
 
     $response = $user->login();
 
-    if (!isset($_SESSION['user'])) {
+    if (!isset($_SESSION['user']) && !empty($response)) {
         $_SESSION['user'] = $correo;
         $json['status'] = 'ok';
         $json['message'] = 'You have Login';

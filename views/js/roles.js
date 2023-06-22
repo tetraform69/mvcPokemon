@@ -9,7 +9,7 @@ let table = new DataTable(document.getElementById("table"), {
             text: '<i class="fa-regular fa-copy"></i>',
             titleAttr: "Copiar",
             exportOptions: {
-                columns: [0,1,2,3]
+                columns: [0, 1, 2, 3]
             },
             className: "copyDataTable"
         },
@@ -18,7 +18,7 @@ let table = new DataTable(document.getElementById("table"), {
             text: '<i class="fa-regular fa-file-excel"></i>',
             titleAttr: "Excel",
             exportOptions: {
-                columns: [0,1,2,3]
+                columns: [0, 1, 2, 3]
             },
             className: "excelDataTable"
         },
@@ -27,7 +27,7 @@ let table = new DataTable(document.getElementById("table"), {
             text: '<i class="fa-regular fa-file-pdf"></i>',
             titleAttr: "PDF",
             exportOptions: {
-                columns: [0,1,2,3]
+                columns: [0, 1, 2, 3]
             },
             className: "pdfDataTable",
             download: "open"
@@ -37,7 +37,7 @@ let table = new DataTable(document.getElementById("table"), {
             text: '<i class="fa-solid fa-print"></i>',
             titleAttr: "Imprimir",
             exportOptions: {
-                columns: [0,1,2,3]
+                columns: [0, 1, 2, 3]
             },
             className: "printDataTable"
         }
@@ -95,8 +95,8 @@ function read() {
                     "Fecha De Creacion": `${rol.fechaCreacion}`,
                     "Opciones": `<a onclick="readID('${rol.id}')" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa-solid fa-pen-to-square"></i></i></a>
                     <a onclick="readID('${rol.id}')" class="btn btn-danger" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></a>`
-                }).draw();
-            });
+                }).draw()
+            })
             // updateEstado()
         })
         .catch(error => {

@@ -30,7 +30,7 @@ class rolController
     public function state($data)
     {
         $this->rol->setId($data->id);
-        $this->rol->setEstado($data->estado == "A"? "I": "A");
+        $this->rol->setEstado($data->estado == "A" ? "I" : "A");
         return $this->rol->estado();
     }
 
