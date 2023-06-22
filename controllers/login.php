@@ -1,24 +1,42 @@
 <?php
 
-include_once '../model/user.php';
+include_once('model/user.php');
 
-$correo = $_GET['correo'];
-$password = $_GET['password'];
+function login($data)
+{
+    $correo = $data->correo;
+    $password = $data->password;
 
-$user = new \Model\User;
-$user->setCorreo($correo);
-$user->setPassword($password);
+    $user = new \Model\User;
+    $user->setCorreo($correo);
+    $user->setPassword($password);
 
-$response = $user->login();
+    $response = $user->login();
 
-if (isset($response[0]['correo']) && !empty($response[0]['correo'])) {
-    session_start();
-    $_SESSION['nombre'] = $response[0]['nombre'];
-    $_SESSION['apellido'] = $response[0]['apellido'];
-    $_SESSION['correo'] = $response[0]['correo'];
-    $_SESSION['rol'] = $response[0]['idRol'];
+    if (!isset($_SESSION['user'])) {
+        $_SESSION['user'] = $correo;
+        $json['status'] = 'ok';
+        $json['message'] = 'You have Login';
+    } elseif (empty($response)) {
+        $json['status'] = 'error';
+        $json['message'] = 'incorrect credentials';
+    } else {
+        $json['status'] = 'error';
+        $json['message'] = 'already have a session';
+    }
+
+    $json['response'] = $response;
+    return $json;
+    unset($user);
+    unset($response);
 }
 
-echo json_encode($response);
-unset($user);
-unset($response);
+function validate(){
+    if(!isset($_SESSION['user'])){
+        header('Location: /mvcPokemon/login');   
+    }
+}
+
+function logout() {
+    session_destroy();
+}

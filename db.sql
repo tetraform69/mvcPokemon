@@ -19,36 +19,16 @@
 CREATE DATABASE IF NOT EXISTS `pokemon33` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pokemon33`;
 
--- Volcando estructura para tabla pokemon33.compras
-CREATE TABLE IF NOT EXISTS `compras` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `codigoCom` int NOT NULL DEFAULT '0',
-  `fechaCom` date NOT NULL,
-  `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
-  `usuarioCreacion` int NOT NULL DEFAULT '0',
-  `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `usuarioModificacion` int NOT NULL DEFAULT '0',
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigoCom` (`codigoCom`),
-  KEY `FK_compras_usuarios` (`usuarioCreacion`),
-  KEY `FK_compras_usuarios_2` (`usuarioModificacion`),
-  CONSTRAINT `FK_compras_usuarios` FOREIGN KEY (`usuarioCreacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_compras_usuarios_2` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Volcando datos para la tabla pokemon33.compras: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla pokemon33.comprod
-CREATE TABLE IF NOT EXISTS `comprod` (
+-- Volcando estructura para tabla pokemon33.comprad
+CREATE TABLE IF NOT EXISTS `comprad` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idCom` int NOT NULL DEFAULT '0',
   `idPro` int NOT NULL DEFAULT '0',
-  `cantidadProCom` int NOT NULL DEFAULT '0',
+  `cantidad` int NOT NULL DEFAULT '0',
   `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
-  `usuarioCreacion` int NOT NULL DEFAULT '0',
+  `usuarioCreacion` int DEFAULT NULL,
   `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `usuarioModificacion` int NOT NULL DEFAULT '0',
+  `usuarioModificacion` int DEFAULT NULL,
   `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `FK_comprod_compras` (`idCom`),
@@ -61,12 +41,32 @@ CREATE TABLE IF NOT EXISTS `comprod` (
   CONSTRAINT `FK_comprod_usuarios_2` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pokemon33.comprod: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla pokemon33.comprad: ~0 rows (aproximadamente)
+
+-- Volcando estructura para tabla pokemon33.compras
+CREATE TABLE IF NOT EXISTS `compras` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `codigo` int NOT NULL DEFAULT '0',
+  `fecha` date NOT NULL,
+  `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
+  `usuarioCreacion` int DEFAULT NULL,
+  `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuarioModificacion` int DEFAULT NULL,
+  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigoCom` (`codigo`) USING BTREE,
+  KEY `FK_compras_usuarios` (`usuarioCreacion`),
+  KEY `FK_compras_usuarios_2` (`usuarioModificacion`),
+  CONSTRAINT `FK_compras_usuarios` FOREIGN KEY (`usuarioCreacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_compras_usuarios_2` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Volcando datos para la tabla pokemon33.compras: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla pokemon33.impuestos
 CREATE TABLE IF NOT EXISTS `impuestos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombreImp` varchar(30) NOT NULL DEFAULT '0',
+  `nombre` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `porcentaje` int NOT NULL DEFAULT '0',
   `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
   `usuarioCreacion` int NOT NULL DEFAULT '0',
@@ -81,13 +81,13 @@ CREATE TABLE IF NOT EXISTS `impuestos` (
 -- Volcando estructura para tabla pokemon33.pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `codigoPed` int NOT NULL DEFAULT '0',
-  `fechaPed` date NOT NULL,
-  `idUsu` int NOT NULL DEFAULT '0',
+  `codigo` int NOT NULL DEFAULT '0',
+  `fecha` date NOT NULL,
+  `idUser` int NOT NULL DEFAULT '0',
   `nombre` varchar(30) NOT NULL,
   `direccion` varchar(30) NOT NULL,
   `telefono` varchar(30) NOT NULL,
-  `totalPed` int NOT NULL,
+  `total` int NOT NULL,
   `formaPago` enum('Transferencia','ContraEntrega','Consignacion') DEFAULT NULL,
   `fechaEnvPedido` date NOT NULL,
   `estadoPedido` enum('Pendiente','Enviado','Cancelado','Recibido') DEFAULT NULL,
@@ -97,11 +97,11 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `usuarioModificacion` int NOT NULL DEFAULT '0',
   `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `codigoPed` (`codigoPed`),
-  KEY `idUsu` (`idUsu`),
+  UNIQUE KEY `codigoPed` (`codigo`) USING BTREE,
   KEY `usuarioCreacion` (`usuarioCreacion`),
   KEY `usuarioModificacion` (`usuarioModificacion`),
-  CONSTRAINT `FK_pedidos_usuarios` FOREIGN KEY (`idUsu`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
+  KEY `idUsu` (`idUser`) USING BTREE,
+  CONSTRAINT `FK_pedidos_usuarios` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_pedidos_usuarios_2` FOREIGN KEY (`usuarioCreacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_pedidos_usuarios_3` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -182,7 +182,7 @@ INSERT INTO `roles` (`id`, `nombreRol`, `estado`, `usuarioCreacion`, `fechaCreac
 -- Volcando estructura para tabla pokemon33.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipoDoc` int NOT NULL,
+  `tipoDoc` varchar(50) NOT NULL DEFAULT '',
   `identificacion` int NOT NULL,
   `nombre` varchar(30) NOT NULL DEFAULT '',
   `apellido` varchar(30) NOT NULL DEFAULT '',
@@ -203,9 +203,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   KEY `usuarioCreacion` (`usuarioCreacion`),
   KEY `usuarioModificacion` (`usuarioModificacion`),
   CONSTRAINT `FK_usuarios_roles` FOREIGN KEY (`idRol`) REFERENCES `roles` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pokemon33.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla pokemon33.usuarios: ~1 rows (aproximadamente)
+INSERT INTO `usuarios` (`id`, `tipoDoc`, `identificacion`, `nombre`, `apellido`, `correo`, `password`, `direccion`, `telefono`, `genero`, `idRol`, `estado`, `usuarioCreacion`, `fechaCreacion`, `usuarioModificacion`, `fechaModificacion`) VALUES
+	(3, 'cc', 1, 'oscar', 'corredor', 'oyco@mail.co', '1234', '1234', '317', 'M', 2, 'A', 3, '2023-06-22 13:23:48', 3, '2023-06-22 13:23:48');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

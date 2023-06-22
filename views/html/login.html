@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mvcPokemon/views/css/login.css">
+    <script src="/mvcPokemon/views/js/login.js"></script>
     <title>Login</title>
-    <link rel="stylesheet" href="assets/css/login.css">
-    <script src="assets/js/login.js" defer></script>
 </head>
 
 <body>
-    <form class="box">
+    <form class="box" onsubmit="login(event)">
         <h1>Log in</h1>
         <div class="box-input">
-            <input type="email" name="correo" id="correo" required>
-            <label for="correo">Email</label>
+            <input type="email" id="email" required>
+            <label for="email">Email</label>
         </div>
         <div class="box-input">
-            <input type="password" name="password" id="password" required>
+            <input type="password" id="password" required>
             <label for="password">Password</label>
         </div>
-        <button type="button" onclick="login()">Log in</button>
+        <button>Log in</button>
+        <p id="message"></p>
     </form>
 </body>
 

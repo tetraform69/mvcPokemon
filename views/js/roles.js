@@ -52,17 +52,19 @@ let table = new DataTable(document.getElementById("table"), {
 })
 
 function created() {
-    url = "../controllers/roles.create.php"
+    url = "/mvcPokemon/rol"
 
     //* Informacion del formulario
-    var data = `nameRol=${document.getElementById("nameRol").value}`
+    var data = {
+        'name': document.getElementById("nameRol").value
+    }
 
     //* Opciones de la peticion
     var options = {
         method: 'POST',
-        body: data,
+        body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     }
 
@@ -78,7 +80,7 @@ function created() {
 }
 
 function read() {
-    url = "../controllers/roles.read.php"
+    url = "/mvcPokemon/rol"
 
     fetch(url)
         .then(response => response.json())
@@ -103,19 +105,9 @@ function read() {
 }
 
 function readID(id) {
-    url = "../controllers/roles.readOne.php"
+    url = `/mvcPokemon/rol/${id}`
 
-    var data = `id=${id}`
-
-    var options = {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
-
-    fetch(url, options)
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             document.getElementById("rolNameUpdate").value = data[0].nombreRol
@@ -130,7 +122,7 @@ function readID(id) {
 function updated() {
     let id = localStorage.id
     let name = document.getElementById("rolNameUpdate").value
-    url = "../controllers/roles.update.php"
+    url = "/mvcPokemon/rol"
 
     var data = {
         "id": id,
@@ -138,7 +130,7 @@ function updated() {
     }
 
     var options = {
-        method: 'POST',
+        method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -159,14 +151,14 @@ function updated() {
 function deleted() {
     let id = localStorage.id
 
-    let url = "../controllers/roles.delete.php"
+    let url = "/mvcPokemon/rol"
 
     let data = {
         "id": id,
     }
 
     let options = {
-        method: "POST",
+        method: "DELETE",
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -184,7 +176,7 @@ function deleted() {
 }
 
 function statusRol(id, estado) {
-    url = "../controllers/roles.estado.php"
+    url = "/mvcPokemon/rol"
 
     var data = {
         "id": id,
@@ -192,7 +184,7 @@ function statusRol(id, estado) {
     }
 
     var options = {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'

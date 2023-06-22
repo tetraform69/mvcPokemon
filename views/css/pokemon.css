@@ -1,0 +1,234 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+p{
+    margin: 5px 0px;
+    color: azure;
+}
+
+h1{
+    color: azure;
+}
+
+img{
+    width: 300px;
+    height: 300px;
+    background: #a5a5a5;
+    border-radius: 5px;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#pokemon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background: #666666;
+}
+
+.pokemon{
+    display: flex;
+    flex-direction: column;
+    background: #202020;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.name{
+    padding-top: 50px;
+}
+
+.types, .stats{
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto;
+}
+
+.types{
+    width: 80%;
+    margin: 10px 0px;
+}
+
+.type{
+    align-self: center;
+    padding: 5px 20px;
+    border-radius: 50px;
+    width: 120px;
+    outline:  solid black 2px;
+    text-align: center;
+    color: #202020;
+}
+
+.stats{
+    width: 80%;
+    background: #303030;
+    border-radius: 5px;
+    padding-top: 20px;
+}
+
+.skills{
+    display: grid;
+    margin: 20px 0px;
+    grid-template-areas: "uno dos"
+    "tres cuatro";
+    width: 80%;
+}
+
+.skill{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 40px;
+    margin: 5px 0px;
+    color: #202020;
+    border-radius: 5px;
+    background: rgb(0, 217, 255);
+}
+
+.normal{
+    background:  lavender;
+    border: solid 3px gainsboro;
+}
+
+.fighting{
+    background:  firebrick;
+    border: solid 3px darkred;
+}
+
+.flying{
+    background: rgb(136, 188, 255);
+    border: solid 3px rgb(110, 172, 252);
+}
+
+.poison{
+    background:  mediumpurple;
+    border: solid 3px blueviolet;
+}
+
+.ground{
+    background:  burlywood;
+    border: solid 3px tan;
+}
+
+.rock{
+    background:  peru;
+    border: solid 3px chocolate;
+}
+
+.bug{
+    background:  YellowGreen;
+    border: solid 3px olivedrab;
+}
+
+.ghost{
+    background:  purple;
+    border: solid 3px indigo;
+}
+
+.steel{
+    background:  LightGrey;
+    border: solid 3px silver;
+}
+
+.fire{
+    background:  crimson;
+    border: solid 3px firebrick;
+}
+
+.water{
+    background:  royalblue;
+    border: solid 3px MediumSlateBlue;
+}
+
+.grass{
+    background:  lime;
+    border: solid 3px limegreen;
+}
+
+.electric{
+    background:  yellow;
+    border: solid 3px gold;
+}
+
+.psychic{
+    background:  violet;
+    border: solid 3px plum;
+}
+
+.ice{
+    background:  aquamarine;
+    border: solid 3px paleturquoise;
+}
+
+.dragon{
+    background:  mediumslateblue;
+    border: solid 3px slateblue;
+}
+
+.dark{
+    background:  slategray;
+    border: solid 3px darkslategray;
+}
+
+.fairy{
+    background:   rgb(255, 136, 238);
+    border: solid 3px rgb(255, 187, 238);
+}
+
+@media (min-width: 1000px) {
+    .pokemon{
+        display: grid;
+        grid-template-areas: "name typos"
+    "imagen stats"
+    "imagen skills";
+    padding: 20px;
+    }
+
+    .name{
+        grid-area: name;
+        margin-right: 50px;
+        text-align: center;
+    }
+
+    img{
+        grid-area: imagen;
+        margin-right: 50px;
+    }
+
+    .types{
+        grid-area: typos;
+        align-self: center;
+        justify-content: space-evenly;
+        width: 120%;
+    }
+
+    .stats{
+        grid-area: stats;
+        width: 120%;
+    }
+
+    .skills{
+        grid-area: skills;
+        width: 120%;
+    }
+}

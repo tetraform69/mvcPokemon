@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" />
+    <link rel="stylesheet" href="/mvcPokemon/views/css/style2.css">
+    <script src="/mvcPokemon/views/js/comun.js" defer></script>
+</head>
+
+<body onload="typePokemon()">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark sticky-top" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/mvcPokemon/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mvcPokemon/logout">logout</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Formularios
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/mvcPokemon/roles">Roles</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search" id="search" onkeyup="autoComplete()" onclick="autoComplete()">
+                        <div id="list-pokemon"></div>
+                        <button class="btn btn-success h-50" type="button" id="cardPokemon" ondrop="drop(event)"
+                            ondragover="allowDrop(event)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                            aria-controls="offcanvasRight"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col-8 bg-info">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner fondo-pokemon">
+                        <div class="carousel-item active">
+                            <img src="/mvcPokemon/views/img/mega rayquaza.png" class="d-block w-100" alt="..."
+                                style="height: 300px; object-fit: contain;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/mvcPokemon/views/img/zekrom.png" class="d-block w-100" alt="..."
+                                style="height: 300px; object-fit: contain;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/mvcPokemon/views/img/zygarde.png" class="d-block w-100" alt="..."
+                                style="height: 300px; object-fit: contain;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-4 bg-dark"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 bg-danger">
+                <div class="container my-3 mt-5" id="featureContainer">
+
+                    <div>
+                        <div id="carbon-block"></div>
+                    </div>
+                    <div class="row mx-auto my-auto justify-content-center">
+                        <div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="d-flex justify-content-between position-relative top-50 px-3"
+                                style="z-index: 1;">
+                                <a class="indicator" href="#featureCarousel" role="button" data-bs-slide="prev">
+                                    <span class="fas fa-chevron-left" aria-hidden="true"></span>
+                                </a> &nbsp;&nbsp;
+                                <a class="w-aut indicator" href="#featureCarousel" role="button" data-bs-slide="next">
+                                    <span class="fas fa-chevron-right" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <div class="carousel-inner" role="listbox" id="typePokemonCarousel">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="icono">
+
+        </div>
+        <div class="row" style="height: 280px;">
+            <div class="col-12 bg-primary"></div>
+        </div>
+
+        <div class="row justify-content-between" style="height: 150px;">
+            <div class="col-5 bg-warning"></div>
+            <div class="col-5 bg-secondary"></div>
+        </div>
+
+        <div class="row bg-dark align-items-center" style="height: 300px;">
+            <div class="col-4 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="height: 300px;">
+            <div class="col-12 bg-danger"></div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">Toggle right offcanvas</button>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" id="offcanvas-body">
+            
+        </div>
+    </div>
+    <div id="cardPokemon" class="card mb-3" style="max-width: 540px;" draggable="true" ondragstart="drag(event)">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="/mvcPokemon/views/img/logo.jpg" class="img-fluid rounded-start" alt="..." id="imgPokemon">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const frutas = []
+    const categoria = []
+
+    function carrito() {
+        let fruta = document.getElementById("search").value
+
+        frutas.push(fruta)
+
+        console.log(fruta)
+    }
+
+    function typePokemon() {
+        fetch("https://pokeapi.co/api/v2/type")
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data)
+                data.results.forEach((element, index) => {
+                    categoria.push(element)
+                    divTypePokemon(element, index)
+                })
+                carousel()
+            })
+    }
+
+    function divTypePokemon(element, index) {
+        document.getElementById("typePokemonCarousel").innerHTML += `<div class="carousel-item ${index == 0 ? "active" : ""}">
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-img">
+                        <a href="typePokemon.html" onclick="urlLocal('${element.url}')">
+                        <img src="https://source.unsplash.com/r13sao-Gmnc/333x500"
+                            class="img-fluid" alt="${element.name}" style="min-height: 300px;">
+                        </a>
+                    </div>
+                    <div class="card-img-overlays">${element.name}</div>
+                </div>
+            </div>
+        </div>`
+    }
+
+    function carousel() {
+        let myCarousel = document.querySelectorAll('#featureContainer .carousel .carousel-item');
+        myCarousel.forEach((el) => {
+            const minPerSlide = 4
+            let next = el.nextElementSibling
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    // wrap carousel by using first child
+                    next = myCarousel[0]
+                }
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
+        })
+    }
+
+
+    /*function icono() {
+        var headers = {
+            "apikey": "Z55vVs1Zt0OB3HHjaVcJ4JK87o0nzfIdh4TcQqYcLgflVtrk"
+        }
+        fetch("https://api.flaticon.com/v3", {
+            mode: "no-cors",
+            headers: headers
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+    icono()*/
+
+    function urlLocal(url) {
+        //* dos formas de crear el local storage
+        localStorage.setItem("url", url)
+        //* localStorage.url = url 
+    }
+
+    function autoComplete() {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+            .then(response => response.json())
+            .then(data => {
+                let buscar = document.getElementById('search').value
+                if (buscar.length >= 2) {
+                    document.getElementById("list-pokemon").classList.remove('hide')
+                    let list = `<div class="list-group">`
+                    const filtroPokemon = data.results.filter(filtrarPokemon)
+                    filtroPokemon.forEach(pokemon => {
+                        iconoPokemon(pokemon.url)
+                        list += `<a onclick="detallePokemon('${pokemon.url}')" href="/pokemon.html" class="list-group-item list-group-item-action">
+                            <img id="icono${pokemon.name}">
+                            ${pokemon.name}</a>`
+                    })
+                    list += '</div>'
+                    document.getElementById("list-pokemon").innerHTML = list
+                } else {
+                    document.getElementById("list-pokemon").innerHTML = ''
+                    document.getElementById("list-pokemon").classList.add('hide')
+                }
+            })
+    }
+
+    function filtrarPokemon(element) {
+        let buscar = document.getElementById('search').value
+        let name = element.name
+        return name.includes(buscar.toLowerCase())
+    }
+
+    function iconoPokemon(url) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`icono${data.name}`).src = data.sprites.other["official-artwork"].front_default
+            })
+    }
+
+    function detallePokemon(urlPokemon) {
+        localStorage.urlPokemon = urlPokemon
+    }
+
+    window.addEventListener('click', (event) => {
+        if (event.target.className != 'search') {
+            document.getElementById("list-pokemon").classList.add('hide')
+        }
+    })
+</script>
+
+</html>

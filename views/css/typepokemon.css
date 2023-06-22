@@ -1,0 +1,61 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-image: linear-gradient(#161616cc,#161616bb),url(/images/pokemons.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Pokemons {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#tipoPokemon{
+    text-align: center;
+    background: #20202070;
+    border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+    padding: 10px;
+    width: 90%;
+    margin-top: 60px;
+    color: #dadada;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    object-position: center;
+    object-fit: contain;
+}
+
+.pokemon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+.pokemon {
+    color: #dadada;
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-evenly;
+    text-decoration: none;
+    background: #202020;
+    background-image: linear-gradient(#2020203f,#202020b0),url(/images/pokeball.jpg);
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+    padding: 10px;
+}
+
+.pokemon:hover{
+    color: #dadada;
+    background-image: linear-gradient(#1f1e1e83,#202020c9),url(/images/pokeball.jpg);
+}
