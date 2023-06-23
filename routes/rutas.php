@@ -43,6 +43,18 @@ function rutas()
         render("productos");
         return;
     }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SERVER['REQUEST_URI'] === '/mvcPokemon/pokemones') {
+        validate();
+        render("pokemones");
+        return;
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_SERVER['REQUEST_URI'] === '/mvcPokemon/pokemon') {
+        validate();
+        render("pokemon");
+        return;
+    }
 
     if ($_SERVER['REQUEST_URI'] === '/mvcPokemon/rol') {
         $rol = new rolController;

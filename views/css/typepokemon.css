@@ -3,7 +3,7 @@
 }
 
 body{
-    background-image: linear-gradient(#161616cc,#161616bb),url(/images/pokemons.jpg);
+    background-image: linear-gradient(#161616cc,#161616bb),url(/mvcPokemon/views/img/pokemons.jpg);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +47,7 @@ img {
     justify-content: space-evenly;
     text-decoration: none;
     background: #202020;
-    background-image: linear-gradient(#2020203f,#202020b0),url(/images/pokeball.jpg);
+    background-image: linear-gradient(#2020203f,#202020b0),url(/mvcPokemon/views/img/pokeball.jpg);
     background-position: bottom;
     background-size: cover;
     border-radius: 10px 10px 10px 10px;
@@ -57,5 +57,5 @@ img {
 
 .pokemon:hover{
     color: #dadada;
-    background-image: linear-gradient(#1f1e1e83,#202020c9),url(/images/pokeball.jpg);
+    background-image: linear-gradient(#1f1e1e83,#202020c9),url(/mvcPokemon/views/img/pokeball.jpg);
 }

@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `fechaEnvPedido` date NOT NULL,
   `estadoPedido` enum('Pendiente','Enviado','Cancelado','Recibido') DEFAULT NULL,
   `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
-  `usuarioCreacion` int NOT NULL DEFAULT '0',
+  `usuarioCreacion` int DEFAULT NULL,
   `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `usuarioModificacion` int NOT NULL DEFAULT '0',
+  `usuarioModificacion` int DEFAULT NULL,
   `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigoPed` (`codigo`) USING BTREE,
@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `descripPro` varchar(50) NOT NULL DEFAULT '0',
   `estado` enum('A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
   `usuarioCreacion` int DEFAULT NULL,
+  `categoria` int DEFAULT NULL,
   `fechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `usuarioModificacion` int DEFAULT NULL,
   `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -151,10 +152,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   CONSTRAINT `FK_productos_usuarios_2` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pokemon33.productos: ~2 rows (aproximadamente)
-INSERT INTO `productos` (`id`, `nombrePro`, `precioPro`, `cantidadPro`, `descripPro`, `estado`, `usuarioCreacion`, `fechaCreacion`, `usuarioModificacion`, `fechaModificacion`) VALUES
-	(1, 'Martillo', 5000, 1, 'muy bonito', 'I', NULL, '2023-06-01 20:57:08', NULL, '2023-06-01 20:57:08'),
-	(2, 'Taladro', 2500, 5, 'bonito', 'A', NULL, '2023-06-01 22:28:23', NULL, '2023-06-01 22:28:23');
+-- Volcando datos para la tabla pokemon33.productos: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla pokemon33.roles
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -170,9 +168,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
   KEY `usuarioModificacion` (`usuarioModificacion`),
   CONSTRAINT `FK_roles_usuarios` FOREIGN KEY (`usuarioCreacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_roles_usuarios_2` FOREIGN KEY (`usuarioModificacion`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pokemon33.roles: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla pokemon33.roles: ~4 rows (aproximadamente)
 INSERT INTO `roles` (`id`, `nombreRol`, `estado`, `usuarioCreacion`, `fechaCreacion`, `usuarioModificacion`, `fechaModificacion`) VALUES
 	(2, 'Admin', 'A', NULL, '2023-05-09 20:40:57', NULL, '2023-05-09 20:40:57'),
 	(3, 'user', 'A', NULL, '2023-05-09 20:41:07', NULL, '2023-05-09 20:41:07'),

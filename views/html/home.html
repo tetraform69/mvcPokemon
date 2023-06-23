@@ -28,10 +28,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/mvcPokemon/home">Home</a>
+                            <a class="nav-link active" aria-current="page" href="home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/mvcPokemon/logout">logout</a>
+                            <a class="nav-link" href="pokemones">pokemones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout">logout</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -236,7 +239,7 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-img">
-                        <a href="typePokemon.html" onclick="urlLocal('${element.url}')">
+                        <a href="pokemones" onclick="urlLocal('${element.url}')">
                         <img src="https://source.unsplash.com/r13sao-Gmnc/333x500"
                             class="img-fluid" alt="${element.name}" style="min-height: 300px;">
                         </a>
